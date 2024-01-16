@@ -1,23 +1,23 @@
-// Def canvas, contexte
+// Définition du canvas et du contexte
 const canvas = document.getElementById('snakeCanvas');
 const ctx = canvas.getContext('2d');
 
-// Taille d'une case du snake
+// Taille d'une case du serpent
 const box = 20;
 
-// Position du serpent départ
+// Initialisation de la position du serpent
 let snake = [{
   x: 10,
   y: 10
 }];
 
-// Direction du serpent départ
+// Initialisation de la direction du serpent
 let direction = 'right';
 
-// Dessiner le serpent
+// Fonction principale pour dessiner le serpent
 function drawSnake() {
   for (let i = 0; i < snake.length; i++) {
-    ctx.fillStyle = (i === 0) ? '#4CAF50' : '#45a049'; // Couleur tête et corps
+    ctx.fillStyle = (i === 0) ? '#4CAF50' : '#45a049'; // Couleur de tête et corps
     ctx.fillRect(snake[i].x * box, snake[i].y * box, box, box);
 
     ctx.strokeStyle = '#fff'; // Bordures
@@ -25,13 +25,13 @@ function drawSnake() {
   }
 }
 
-// Dessiner une pomme
+// Fonction pour dessiner une pomme
 function drawApple(apple) {
   ctx.fillStyle = '#FF0000';
   ctx.fillRect(apple.x * box, apple.y * box, box, box);
 }
 
-// Dessiner le jeu
+// Fonction principale pour dessiner le jeu
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -45,7 +45,7 @@ function draw() {
   moveSnake();
 }
 
-// Déplacer le serpent
+// Fonction pour déplacer le serpent
 function moveSnake() {
   let head = {
     x: snake[0].x,
@@ -67,6 +67,17 @@ function moveSnake() {
     }
   }
 
+  // Gestion de la collision avec les bords du canvas
+  if (head.x < 0) {
+    head.x = canvas.width / box - 1; // Réapparaitre à l'extrémité droite
+  } else if (head.x * box >= canvas.width) {
+    head.x = 0; // Réapparaitre à l'extrémité gauche
+  } else if (head.y < 0) {
+    head.y = canvas.height / box - 1; // Réapparaitre en bas
+  } else if (head.y * box >= canvas.height) {
+    head.y = 0; // Réapparaitre en haut
+  }
+
   // Ajout de la nouvelle tête
   snake.unshift(head);
 
@@ -77,12 +88,6 @@ function moveSnake() {
   } else {
     // Supprimer la dernière partie du serpent
     snake.pop();
-  }
-
-  // Gestion de la collision avec les bords du canvas
-  if (head.x < 0 || head.x * box >= canvas.width || head.y < 0 || head.y * box >= canvas.height) {
-    // Réinitialiser le jeu en cas de collision
-    resetGame();
   }
 }
 
