@@ -58,6 +58,15 @@ function moveSnake() {
   else if (direction === 'up') head.y--;
   else if (direction === 'down') head.y++;
 
+  // Vérification de la collision avec le corps du serpent
+  for (let i = 0; i < snake.length; i++) {
+    if (head.x === snake[i].x && head.y === snake[i].y) {
+      // Réinitialiser le jeu en cas de collision avec le corps du serpent
+      resetGame();
+      return;
+    }
+  }
+
   // Ajout de la nouvelle tête
   snake.unshift(head);
 
