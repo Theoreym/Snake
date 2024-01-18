@@ -1,3 +1,4 @@
+//source codepen j holmes https://codepen.io/32bitkid/pen/DrXOVg
 var bind = Function.prototype.bind,
     $append = bind.call(Element.prototype.appendChild, document.querySelector("output")),
     $new = bind.call(Document.prototype.createElement, document),
@@ -44,9 +45,9 @@ var type = function(text, promise) {
   return promise;
 };
 
-type("Testing....")
+type("Bienvenue aventurier !")
   .wait(500)
-  .then("This is just a test...")
-  .then("This is *only* a test...")
-  .wait(1500)
-  .then("Votre mission si vous l'acceptez, c'est de manger toutes les pommes sur votre chemin, le plus longtemps possible !");
+  .then("Votre mission, si vous l'acceptez...")
+  .then("Manger le plus de pommes possibles !")
+  // .wait(1500)
+  // .then("");
