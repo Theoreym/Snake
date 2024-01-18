@@ -49,4 +49,4 @@ type("Testing....")
   .then("This is just a test...")
   .then("This is *only* a test...")
   .wait(1500)
-  .then("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vitae tellus aliquet, eleifend mi id, malesuada massa. Nam sit amet nunc ut nulla elementum tempor eu ut ipsum. Suspendisse eget augue sollicitudin, adipiscing dui sed, blandit nulla. Donec tempor vehicula nisi at molestie. Vestibulum interdum sem arcu, vitae sodales libero gravida et. Suspendisse pretium consectetur augue at lacinia. Ut urna lectus, tincidunt ut elit vitae, egestas egestas ipsum. Maecenas gravida tortor eget metus pulvinar sodales. Cras vitae nisi nec felis varius auctor. Donec semper aliquam mollis.");
+  .then("Votre mission si vous l'acceptez, c'est de manger toutes les pommes sur votre chemin, le plus longtemps possible !");
