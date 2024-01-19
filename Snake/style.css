@@ -176,3 +176,18 @@ button:hover {
 		transform: translate(-22px, 5px) skew(21deg);
 	}
 }
+.ecrandejeu{
+  display: flex;
+    margin: 0 auto;
+    flex-direction: row;
+    align-items: center;
+}
+h1{font-family: monospace;
+  color: rgba(128,255,128,0.8);
+  text-shadow: 0 0 1ex #3f3, 0 0 2px rgba(255,255,255,0.8);
+font-size: 6em;}
+canvas {
+    border: 1px solid #ddd;
+    display: inline-block;
+    margin: 0 20%;
+  }
