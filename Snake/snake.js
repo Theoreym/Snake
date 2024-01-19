@@ -14,6 +14,28 @@ let snake = [{
 // Initialisation de la direction du serpent
 let direction = 'right';
 
+// Variable pour la boucle de jeu
+let gameLoop;
+
+// Variable pour vérifier si le jeu est en pause
+let gamePaused = false;
+
+// Initialisation de la pomme
+let apple = {};
+generateApple();
+
+// Contrôles du serpent avec les touches du clavier
+document.addEventListener('keydown', (event) => {
+  if (event.code === 'Escape') {
+    togglePause();
+  } else if (!gamePaused) {
+    if (event.code === 'ArrowUp' && direction !== 'down') direction = 'up';
+    else if (event.code === 'ArrowDown' && direction !== 'up') direction = 'down';
+    else if (event.code === 'ArrowLeft' && direction !== 'right') direction = 'left';
+    else if (event.code === 'ArrowRight' && direction !== 'left') direction = 'right';
+  }
+});
+
 // Fonction principale pour dessiner le serpent
 function drawSnake() {
   for (let i = 0; i < snake.length; i++) {
@@ -42,7 +64,9 @@ function draw() {
   drawApple(apple);
 
   // Déplacement du serpent
-  moveSnake();
+  if (!gamePaused) {
+    moveSnake();
+  }
 }
 
 // Fonction pour déplacer le serpent
@@ -125,17 +149,29 @@ function resetGame() {
   generateApple();
 }
 
+// Fonction pour mettre en pause le jeu
+function togglePause() {
+  gamePaused = !gamePaused;
+  if (gamePaused) {
+    clearInterval(gameLoop);
+    showPauseMenu();
+  } else {
+    gameLoop = setInterval(draw, 200);
+    hidePauseMenu();
+  }
+}
+
+// Fonction pour afficher le menu de pause
+function showPauseMenu() {
+  // ICI KHAVA / HAVA
+}
+
+// Fonction pour cacher le menu de pause
+function hidePauseMenu() {
+}
+
 // Générer la première pomme
-let apple = {};
 generateApple();
 
-// Contrôles du serpent avec les touches du clavier
-document.addEventListener('keydown', (event) => {
-  if (event.code === 'ArrowUp' && direction !== 'down') direction = 'up';
-  else if (event.code === 'ArrowDown' && direction !== 'up') direction = 'down';
-  else if (event.code === 'ArrowLeft' && direction !== 'right') direction = 'left';
-  else if (event.code === 'ArrowRight' && direction !== 'left') direction = 'right';
-});
-
 // Boucle de jeu
-setInterval(draw, 200);
+gameLoop = setInterval(draw, 200);
