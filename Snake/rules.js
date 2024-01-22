@@ -41,13 +41,19 @@ var type = function(text, promise) {
   var chars = text.split("").map($text);
   promise = promise || $promise(type);
   $append($new("br"));
+
   process($append($new("q")), chars, promise);
   return promise;
 };
 
+var img = document.createElement("img");
+img.src = "./images/Ouroboros-titre.gif";
+var src = document.getElementById("imgTitre");
+src.appendChild(img);
+
 type("Bienvenue aventurier !")
   .wait(500)
   .then("Votre mission, si vous l'acceptez...")
-  .then("Manger le plus de pommes possibles !")
+  .then("Manger le plus de pommes possible !")
   // .wait(1500)
   // .then("");
