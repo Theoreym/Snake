@@ -1,0 +1,180 @@
+/*********************Contour de cadre mouvant*********************/
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+.block{
+    position: relative;
+    margin: 10% auto 0;
+    width: 80%;
+    height: 800px;
+    background: linear-gradient(0deg, black, rgb(37, 37, 37));
+}
+
+.glow::before, .glow::after{
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: -2px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, rgba(50,205,50,0.5) 49%, rgba(50,205,50,0.5) 100%);
+    background-size: 400%;
+    width: calc(100% + 5px);
+    height: calc(100% + 5px);
+    z-index: -1;
+    animation: animate 20s linear infinite;
+}
+
+@keyframes animate{
+    0%{
+        background-position: 0 0;
+    }
+    50%{
+        background-position: 400% 0;
+    }
+    100%{
+        background-position: 0 0;
+    }
+}
+
+.glow::after{
+    filter: blur(40px);
+}
+body{
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+.block{
+    position: relative;
+    margin: 5% auto 0;
+    width: 80%;
+    height: 800px;
+    background: linear-gradient(0deg, black, rgb(37, 37, 37));
+}
+
+.glow::before, .glow::after{
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: -2px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, rgba(50,205,50,0.5) 49%, rgba(50,205,50,0.5) 100%);
+    background-size: 400%;
+    width: calc(100% + 5px);
+    height: calc(100% + 5px);
+    z-index: -1;
+    animation: animate 20s linear infinite;
+}
+
+@keyframes animate{
+    0%{
+        background-position: 0 0;
+    }
+    50%{
+        background-position: 400% 0;
+    }
+    100%{
+        background-position: 0 0;
+    }
+}
+
+.glow::after{
+    filter: blur(40px);
+}
+
+
+/*********************ecriture terminal progressive*********************/
+@keyframes blink {
+    0%, 49% {
+        border-right-color: transparent;
+   }
+    50%, 100% {
+        border-right-color: currentColor;
+   }
+}
+@keyframes scan {
+    0% {
+        background-position: 0 -100vh;
+   }
+    35%, 100% {
+        background-position: 0 100vh;
+   }
+}
+
+.rules{
+    display: block;
+    position: relative;
+    top:0;
+    width: 100%;
+    height: 1000px;
+    margin: 0 auto;
+    /* background: #151515; */
+}
+
+#imgTitre img{
+    display: block;
+    margin: 5% auto 0 auto;
+}
+
+output {
+    display: inline-block;
+    /* border-radius: 1em; */
+    height: 85vh;
+    padding: 50px;
+    /* box-shadow: inset 0 0 10em 1em rgba(0,0,0,0.5); */
+    /* overflow: auto; */
+	font-size: 3vw;
+	font-weight: 100;
+    text-align: left;
+    font-family: monospace;
+    color: rgba(128,255,128,0.8);
+    position: relative;
+    margin: 0 auto;
+    width: 80%;
+
+}
+/********************** l'effet radar qui descend ***************/
+.rules::before {
+    position: absolute;
+    content: "";
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    background-image: linear-gradient(0deg,transparent 0%,rgba(32,128,32,0.2) 2%,rgba(32,128,32,0.8) 3%,rgba(32,128,32,0.2) 3%,transparent 100%);
+    background-repeat: no-repeat;
+    animation: scan 7.5s linear 0s infinite;
+}
+.rules::after {
+    position: absolute;
+    content: "";
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    /* background-image: radial-gradient(ellipse 50% 15% at 50% 15%,rgba(255,255,255,0.05),transparent), radial-gradient(ellipse 50% 10% at 50% 12%,rgba(255,255,255,0.1),transparent), radial-gradient(ellipse 50% 5% at 50% 10%,rgba(255,255,255,0.1),transparent), radial-gradient(ellipse 50% 3% at 50% 9%,rgba(255,255,255,0.1),transparent), radial-gradient(ellipse 200% 20% at 50% 0%,rgba(0,0,0,0.5),transparent), linear-gradient(0deg,rgba(0,0,0,0.2) 50%,transparent 50%); */
+    background-size: 100%, 100%, 100%, 100%, 100%, 100% 0.25ch;
+}
+
+output q {
+    display: inline-block;
+    border-right: 0 solid currentColor;
+    animation: blink 500ms linear 0s infinite;
+    text-shadow: 0 0 1ex #3f3, 0 0 2px rgba(255,255,255,0.8);
+    margin-bottom: 1em;
+    line-height: 100%;
+    font-size: 0.8em;
+    text-align: left;
+    /* width: 60%; */
+}
+output q::before {
+    content: "> ";
+}
+output q:last-child {
+    border-right-width: 1ch;
+}
