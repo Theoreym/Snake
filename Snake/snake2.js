@@ -327,29 +327,29 @@ class Snake {
   }
   controlls() {
     // Gère les contrôles du serpent
-      // Gère les contrôles du serpent
-      let dir = this.size;
-    
-      // Check the current direction of the snake
-      const isMovingUp = this.dir.y < 0;
-      const isMovingDown = this.dir.y > 0;
-      const isMovingLeft = this.dir.x < 0;
-      const isMovingRight = this.dir.x > 0;
-    
-      if (KEY.ArrowUp && !isMovingDown) {
-        this.dir = new helpers.Vec(0, -dir);
-      }
-      if (KEY.ArrowDown && !isMovingUp) {
-        this.dir = new helpers.Vec(0, dir);
-      }
-      if (KEY.ArrowLeft && !isMovingRight) {
-        this.dir = new helpers.Vec(-dir, 0);
-      }
-      if (KEY.ArrowRight && !isMovingLeft) {
-        this.dir = new helpers.Vec(dir, 0);
-      }
+    // Gère les contrôles du serpent
+    let dir = this.size;
+
+    // Check the current direction of the snake
+    const isMovingUp = this.dir.y < 0;
+    const isMovingDown = this.dir.y > 0;
+    const isMovingLeft = this.dir.x < 0;
+    const isMovingRight = this.dir.x > 0;
+
+    if (KEY.ArrowUp && !isMovingDown) {
+      this.dir = new helpers.Vec(0, -dir);
     }
-    
+    if (KEY.ArrowDown && !isMovingUp) {
+      this.dir = new helpers.Vec(0, dir);
+    }
+    if (KEY.ArrowLeft && !isMovingRight) {
+      this.dir = new helpers.Vec(-dir, 0);
+    }
+    if (KEY.ArrowRight && !isMovingLeft) {
+      this.dir = new helpers.Vec(dir, 0);
+    }
+  }
+
   selfCollision() {
     // Gère la collision du serpent avec lui-même
     for (let i = 0; i < this.history.length; i++) {
@@ -578,6 +578,12 @@ function gameOver() {
   // Montre le temps passé dans la partie
   var formattedFinalTime = document.querySelector("#stopwatch").innerHTML;
   CTX.fillText(`TIME   ${formattedFinalTime}`, W / 2, H / 2 + 100);
+
+  //récupération du score final
+  var finalScore = score;
+  //ajout au tableau
+  add(finalScore, formattedFinalTime);
+
 }
 
 // Fonction de réinitialisation du jeu
@@ -650,3 +656,26 @@ function handleTouchEnd() {
   // Reset snake direction when touch ends
   KEY.resetState();
 }
+
+function add(points, temps) {
+  let nouvelleLigne = tableau.insertRow(-1);
+
+  nouvelleLigne.insertCell(0).textContent = points;
+  nouvelleLigne.insertCell(1).textContent = temps;
+
+}
+
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+} 

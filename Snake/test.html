@@ -19,7 +19,9 @@
       <div id="canvas">
 
       </div>
-      <div class="menuCouleur menu hide" id="menuCouleur">
+      <div>
+        <button type="button" class="collapsible">Paramètres</button>
+        <div class="content menuCouleur menu hide" id="menuCouleur" style="display: none;">
         <button id="snakeBleu" onclick="choice(1)">Bleu</button>
         <button id="snakeVert" onclick="choice()">Vert</button>
         <button id="snakeRouge" onclick="choice(2)">Rouge</button>
@@ -28,6 +30,8 @@
         <button id="snakeBlanc" onclick="choice(5)">Blanc</button>
         <button id="retourMenuScore" onclick="retourMenuScore()"><i class="fa-solid fa-delete-left"></i></button>
       </div>
+      </div>
+      
       <div id="ui">
         <h2>SCORE
         </h2>
@@ -37,6 +41,23 @@
       <div>
         <div id="stopwatch">00:00:00</div>
       </div>
+      <div>
+        <button type="button" class="collapsible">Accéder aux scores</button>
+        <div class="content" style="display: none;">
+          <h2>TABLEAU DES SCORES</h2>
+        <table id="tableau">
+            <thead>
+                <tr>
+                    <th scope="col" style="width: 150px;">Score</th>
+                    <th scope="col" style="width: 150px;">Temps</th>
+                </tr>
+            </thead>
+            <tbody id="Tab">
+                <!-- Les résultats valides seront ajoutés ici -->
+            </tbody>
+        </table>
+        </div>
+    </div>
     </div>
     <div id="author">
       <h1>SNAKE</h1> <span>by TKZT</span>
