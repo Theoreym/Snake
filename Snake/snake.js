@@ -24,6 +24,14 @@ let gamePaused = false;
 let apple = {};
 generateApple();
 
+// Initialisation du score et du meilleur score
+let score = 0;
+let highScore = localStorage.getItem('highScore') || 0;
+
+// Affichage du score et du meilleur score
+const scoreDisplay = document.getElementById('score');
+const highScoreDisplay = document.getElementById('highScore');
+
 // Contrôles du serpent avec les touches du clavier
 document.addEventListener('keydown', (event) => {
   if (event.code === 'Escape') {
@@ -54,7 +62,7 @@ function drawApple(apple) {
 }
 
 // Fonction principale pour dessiner le jeu
-function draw() {
+function draw(paused) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   // Dessiner le serpent
@@ -63,8 +71,12 @@ function draw() {
   // Dessiner la pomme
   drawApple(apple);
 
+  // Afficher le score
+  scoreDisplay.innerHTML = 'Score: ' + score;
+  highScoreDisplay.innerHTML = 'Meilleur score: ' + highScore;
+
   // Déplacement du serpent
-  if (!gamePaused) {
+  if (!paused) {
     moveSnake();
   }
 }
@@ -109,6 +121,9 @@ function moveSnake() {
   if (head.x === apple.x && head.y === apple.y) {
     // Générer une nouvelle pomme
     generateApple();
+
+    // Augmenter le score
+    score++;
   } else {
     // Supprimer la dernière partie du serpent
     snake.pop();
@@ -134,7 +149,17 @@ function generateApple() {
 
 // Fonction de réinitialisation du jeu
 function resetGame() {
-  alert('Game Over!');
+  alert('Game Over! Votre score est de ' + score);
+
+  // Mettre à jour le meilleur score si nécessaire
+  if (score > highScore) {
+    highScore = score;
+    localStorage.setItem('highScore', highScore);
+  }
+
+  // Afficher le score et le meilleur score
+  scoreDisplay.innerHTML = 'Score: ' + score;
+  highScoreDisplay.innerHTML = 'Meilleur score: ' + highScore;
 
   // Réinitialiser la position initiale du serpent
   snake = [{
@@ -144,6 +169,9 @@ function resetGame() {
 
   // Réinitialiser la direction
   direction = 'right';
+
+  // Réinitialiser le score
+  score = 0;
 
   // Générer une nouvelle pomme
   generateApple();
@@ -156,22 +184,30 @@ function togglePause() {
     clearInterval(gameLoop);
     showPauseMenu();
   } else {
-    gameLoop = setInterval(draw, 200);
+    gameLoop = setInterval(function() {
+      draw(gamePaused);
+    }, 200);
     hidePauseMenu();
   }
 }
 
 // Fonction pour afficher le menu de pause
 function showPauseMenu() {
-  // ICI KHAVA / HAVA
+  // Afficher le menu de pause (mettez à jour le HTML/CSS en conséquence)
+  // par exemple, en ajoutant ou en modifiant une classe CSS
+  // pour rendre visible le menu de pause
+  // Assurez-vous de fournir des options pour les paramètres, les meilleurs scores, et la reprise du jeu.
 }
 
 // Fonction pour cacher le menu de pause
 function hidePauseMenu() {
+  // Cacher le menu de pause
 }
 
 // Générer la première pomme
 generateApple();
 
 // Boucle de jeu
-gameLoop = setInterval(draw, 200);
+gameLoop = setInterval(function() {
+  draw(gamePaused);
+}, 200);

@@ -4,18 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.cdnfonts.com/css/cascadia-code" rel="stylesheet">
-    <script src="snake.js" defer></script>
+    <script src="snake2.js" defer></script>
     <title>OUROBOROS</title>
 </head>
 
 <body>
-    <div class="full-page-div">
-        <div class="container">
-            <canvas id="snakeCanvas"></canvas>
+    <div class="container noselect">
+        <div class="wrapper">
+          <button id="replay">
+            <i class="fas fa-play"></i>
+            RESTART
+          </button>
+          <div id="canvas">
+      
+          </div>
+          <div id="ui">
+            <h2>SCORE
+            </h2>
+            <span id="score">00</span>
+          </div>
         </div>
-    </div>
+        <div id="author">
+          <h1>SNAKE</h1> <span>by TKZT</span>
+        </div>
+      </div>
 </body>
 
 </html>
