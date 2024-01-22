@@ -9,6 +9,62 @@ let CTX = dom_canvas.getContext("2d");
 const W = (dom_canvas.width = 400);
 const H = (dom_canvas.height = 400);
 
+//fonction temps
+
+var startTime;
+var elapsedTime = 0;
+var timerId;
+let finalElapsedTime;
+
+// Function to update the stopwatch display
+function updateStopwatchDisplay() {
+  const currentTime = new Date().getTime();
+  elapsedTime = currentTime - startTime;
+  const formattedTime = formatTime(elapsedTime);
+  document.getElementById("stopwatch").innerText = formattedTime;
+  timerId = requestAnimationFrame(updateStopwatchDisplay);
+}
+
+// fonction pour lancer le temps
+function startStopwatch() {
+  startTime = new Date().getTime();
+  updateStopwatchDisplay();
+}
+
+// fonction pour formater le temps correctement (00:00:00)
+function formatTime(milliseconds) {
+  const seconds = Math.floor(milliseconds / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+
+  const formattedHours = padNumber(hours);
+  const formattedMinutes = padNumber(minutes % 60);
+  const formattedSeconds = padNumber(seconds % 60);
+
+  return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+}
+
+// fonction pour toujours avoir un format 00:00:00 même avec des chiffres inférieurs à 10 -> ne pas avoir 00:00:9 par exemple
+function padNumber(number) {
+  return number < 10 ? "0" + number : number;
+}
+
+// fonction d'arrêt du temps
+function stopStopwatch() {
+  cancelAnimationFrame(timerId);
+  const finalElapsedTime = new Date().getTime() - startTime;
+  startTime = null;
+  return finalElapsedTime;
+}
+
+// fonction pour remettre le temps à zéro
+function resetStopwatch() {
+  cancelAnimationFrame(timerId);
+  startTime = new Date().getTime();
+  elapsedTime = 0;
+  updateStopwatchDisplay();
+}
+
 // Variables globales pour le jeu
 let snake,
   food,
@@ -231,17 +287,17 @@ class Snake {
       CTX.fillRect(x, y, this.size, this.size);
 
       CTX.strokeStyle = "#000000"; // Cross color (white in this case)
-    CTX.lineWidth = 2;
+      CTX.lineWidth = 2;
 
-    CTX.beginPath();
-    CTX.moveTo(x + this.size / 4, y + this.size / 4);
-    CTX.lineTo(x + 3 * this.size / 4, y + 3 * this.size / 4);
-    CTX.stroke();
+      CTX.beginPath();
+      CTX.moveTo(x + this.size / 4, y + this.size / 4);
+      CTX.lineTo(x + 3 * this.size / 4, y + 3 * this.size / 4);
+      CTX.stroke();
 
-    CTX.beginPath();
-    CTX.moveTo(x + this.size / 4, y + 3 * this.size / 4);
-    CTX.lineTo(x + 3 * this.size / 4, y + this.size / 4);
-    CTX.stroke();
+      CTX.beginPath();
+      CTX.moveTo(x + this.size / 4, y + 3 * this.size / 4);
+      CTX.lineTo(x + 3 * this.size / 4, y + this.size / 4);
+      CTX.stroke();
 
 
       for (let i = 1; i < this.history.length - 1; i++) {
@@ -271,20 +327,29 @@ class Snake {
   }
   controlls() {
     // Gère les contrôles du serpent
-    let dir = this.size;
-    if (KEY.ArrowUp) {
-      this.dir = new helpers.Vec(0, -dir);
+      // Gère les contrôles du serpent
+      let dir = this.size;
+    
+      // Check the current direction of the snake
+      const isMovingUp = this.dir.y < 0;
+      const isMovingDown = this.dir.y > 0;
+      const isMovingLeft = this.dir.x < 0;
+      const isMovingRight = this.dir.x > 0;
+    
+      if (KEY.ArrowUp && !isMovingDown) {
+        this.dir = new helpers.Vec(0, -dir);
+      }
+      if (KEY.ArrowDown && !isMovingUp) {
+        this.dir = new helpers.Vec(0, dir);
+      }
+      if (KEY.ArrowLeft && !isMovingRight) {
+        this.dir = new helpers.Vec(-dir, 0);
+      }
+      if (KEY.ArrowRight && !isMovingLeft) {
+        this.dir = new helpers.Vec(dir, 0);
+      }
     }
-    if (KEY.ArrowDown) {
-      this.dir = new helpers.Vec(0, dir);
-    }
-    if (KEY.ArrowLeft) {
-      this.dir = new helpers.Vec(-dir, 0);
-    }
-    if (KEY.ArrowRight) {
-      this.dir = new helpers.Vec(dir, 0);
-    }
-  }
+    
   selfCollision() {
     // Gère la collision du serpent avec lui-même
     for (let i = 0; i < this.history.length; i++) {
@@ -452,6 +517,8 @@ function initialize() {
   //création d'une instance de snake en blocs color
   choice();
 
+
+
   snake = new Snake();
 
   food = new Food();
@@ -459,6 +526,12 @@ function initialize() {
   dom_replay.addEventListener("click", reset, false);
   // Lancement de la boucle de jeu
   loop();
+  startStopwatch();
+
+  // Ecoute de mouvements de doigt sur l'écran en version mobile
+  dom_canvas.addEventListener("touchstart", handleTouchStart, false);
+  dom_canvas.addEventListener("touchmove", handleTouchMove, false);
+  dom_canvas.addEventListener("touchend", handleTouchEnd, false);
 }
 
 // Boucle principale du jeu
@@ -498,11 +571,22 @@ function gameOver() {
   CTX.font = "15px Poppins, sans-serif";
   CTX.fillText(`SCORE   ${score}`, W / 2, H / 2 + 60);
   CTX.fillText(`MAXSCORE   ${maxScore}`, W / 2, H / 2 + 80);
+
+  //arrêt du temps
+  stopStopwatch();
+
+  // Montre le temps passé dans la partie
+  var formattedFinalTime = document.querySelector("#stopwatch").innerHTML;
+  CTX.fillText(`TIME   ${formattedFinalTime}`, W / 2, H / 2 + 100);
 }
 
 // Fonction de réinitialisation du jeu
 function reset() {
   // Réinitialise les éléments du jeu
+
+  //réinitialise le temps
+  resetStopwatch();
+
   dom_score.innerText = "00";
   score = "00";
   snake = new Snake();
@@ -516,3 +600,53 @@ function reset() {
 
 // Lancement du jeu lors du chargement de la page
 initialize();
+
+// Gestion des mouvements de doigt sur mobile
+
+let touchStartX = 0;
+let touchStartY = 0;
+
+function handleTouchStart(event) {
+  handleTouchMove(event); // Immediately handle the initial touch position
+}
+
+function handleTouchMove(event) {
+  const touchX = event.touches[0].clientX;
+  const touchY = event.touches[0].clientY;
+
+  const canvasRect = dom_canvas.getBoundingClientRect();
+  const canvasX = touchX - canvasRect.left;
+  const canvasY = touchY - canvasRect.top;
+
+  const cellWidth = W / cells;
+  const cellHeight = H / cells;
+
+  const col = Math.floor(canvasX / cellWidth);
+  const row = Math.floor(canvasY / cellHeight);
+
+  // Reset snake direction
+  KEY.resetState();
+
+  // Determine the touched zone and set the corresponding direction
+  if (col < cells / 3) {
+    // Left zone
+    KEY.ArrowLeft = true;
+  } else if (col > (2 * cells) / 3) {
+    // Right zone
+    KEY.ArrowRight = true;
+  } else {
+    // Middle zone, check vertical direction
+    if (row < cells / 2) {
+      // Top zone
+      KEY.ArrowUp = true;
+    } else {
+      // Bottom zone
+      KEY.ArrowDown = true;
+    }
+  }
+}
+
+function handleTouchEnd() {
+  // Reset snake direction when touch ends
+  KEY.resetState();
+}
