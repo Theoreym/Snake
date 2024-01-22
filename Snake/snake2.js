@@ -184,23 +184,71 @@ class Snake {
     this.index = i;
     this.delay = 5;
     this.size = W / cells;
-    this.color = "white";
     this.history = [];
     this.total = 1;
   }
   draw() {
     // Dessine le serpent sur le canvas
     let { x, y } = this.pos;
-    CTX.fillStyle = this.color;
+    CTX.fillStyle = skin;
     CTX.shadowBlur = 20;
-    CTX.shadowColor = "rgba(255,255,255,.3 )";
+    CTX.shadowColor = skin;
     CTX.fillRect(x, y, this.size, this.size);
     CTX.shadowBlur = 0;
+
+    // Draw two black eyes on the snake's head
+    const eyeRadius = 3; // You can adjust the size of the eyes
+
+    // Calculate eye positions relative to the snake's head
+    const leftEyeX = x + this.size * 0.25;
+    const rightEyeX = x + this.size * 0.75;
+    const eyeY = y + this.size * 0.25;
+
+    // Draw the left eye
+    CTX.fillStyle = "black";
+    CTX.beginPath();
+    CTX.arc(leftEyeX, eyeY, eyeRadius, 0, 2 * Math.PI);
+    CTX.fill();
+
+    // Draw the right eye
+    CTX.beginPath();
+    CTX.arc(rightEyeX, eyeY, eyeRadius, 0, 2 * Math.PI);
+    CTX.fill();
+
+    // Draw a smile below the eyes
+    const smileRadius = this.size * 0.3; // You can adjust the size of the smile
+    const smileCenterX = x + this.size * 0.5;
+    const smileCenterY = y + this.size * 0.5;
+
+    CTX.beginPath();
+    CTX.arc(smileCenterX, smileCenterY, smileRadius, 0, Math.PI);
+    CTX.stroke();
+
     if (this.total >= 2) {
-      for (let i = 0; i < this.history.length - 1; i++) {
+
+      let { x, y } = this.history[0];
+      CTX.fillStyle = skin;
+      CTX.fillRect(x, y, this.size, this.size);
+
+      CTX.strokeStyle = "#000000"; // Cross color (white in this case)
+    CTX.lineWidth = 2;
+
+    CTX.beginPath();
+    CTX.moveTo(x + this.size / 4, y + this.size / 4);
+    CTX.lineTo(x + 3 * this.size / 4, y + 3 * this.size / 4);
+    CTX.stroke();
+
+    CTX.beginPath();
+    CTX.moveTo(x + this.size / 4, y + 3 * this.size / 4);
+    CTX.lineTo(x + 3 * this.size / 4, y + this.size / 4);
+    CTX.stroke();
+
+
+      for (let i = 1; i < this.history.length - 1; i++) {
         let { x, y } = this.history[i];
         CTX.lineWidth = 1;
-        CTX.fillStyle = "rgba(225,225,225,1)";
+        CTX.fillStyle = skin;
+        CTX.shadowBlur = 0;
         CTX.fillRect(x, y, this.size, this.size);
       }
     }
@@ -364,6 +412,35 @@ function clear() {
   CTX.clearRect(0, 0, W, H);
 }
 
+function choice(couleur) {
+  switch (couleur) {
+    case 1:
+      //bleu
+      skin = "#11fffb";
+      break;
+    case 2:
+      //rouge
+      skin = "#ff3f33";
+      break;
+    case 3:
+      //jaune
+      skin = "#fcff33";
+      break;
+    case 4:
+      //orange
+      skin = "#ffd133";
+      break;
+    case 5:
+      //blanc
+      skin = "#ffffff";
+      break;
+    default:
+      //vert par défaut
+      skin = "#1fff11";
+      break;
+  }
+}
+
 // Fonction d'initialisation du jeu
 function initialize() {
   // Initialisation du canvas et des écouteurs d'événements
@@ -372,7 +449,11 @@ function initialize() {
   cellsCount = cells * cells;
   cellSize = W / cells;
   // Création d'une instance de Snake et de Food
+  //création d'une instance de snake en blocs color
+  choice();
+
   snake = new Snake();
+
   food = new Food();
   // Ajout d'un gestionnaire d'événement pour le bouton de replay
   dom_replay.addEventListener("click", reset, false);
