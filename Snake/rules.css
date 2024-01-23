@@ -120,7 +120,7 @@ body{
 output {
     display: inline-block;
     /* border-radius: 1em; */
-    height: 85vh;
+    height: 50vh;
     padding: 50px;
     /* box-shadow: inset 0 0 10em 1em rgba(0,0,0,0.5); */
     /* overflow: auto; */
@@ -178,3 +178,29 @@ output q::before {
 output q:last-child {
     border-right-width: 1ch;
 }
+
+
+/**** BOUTON ACCEPTER******/
+
+.lienAccepter {
+    display: flex;
+    text-shadow: 0 0 5px lime;
+    background-color: black;
+    animation: glitch 1.5s linear infinite;
+    font-family: 'Cascadia Code', sans-serif;
+    font-size: 3vh;
+    color: #66fc66;
+    padding: 20px;;
+    border:none;
+    align-self: flex-end;
+  }
+  
+  .lienAccepter:hover {
+    animation: glitch 1.5s linear infinite;
+    background-color: #66fc66;
+	box-shadow: 0 0 2px lime, inset 0 0 2px lime;
+	border: 0.2vw solid #66fc66;
+    color: black;
+    text-shadow: 0 0 5px #66fc66;
+  }
+  .lienAccepter>a {text-decoration: none;}

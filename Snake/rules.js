@@ -1,3 +1,8 @@
+//fonction pour faire changer le display du bouton
+function LienAccepter(){
+  
+}
+
 //source codepen j holmes https://codepen.io/32bitkid/pen/DrXOVg
 var bind = Function.prototype.bind,
     $append = bind.call(Element.prototype.appendChild, document.querySelector("output")),
@@ -51,9 +56,10 @@ img.src = "./images/Ouroboros-titre.gif";
 var src = document.getElementById("imgTitre");
 src.appendChild(img);
 
+
 type("Bienvenue aventurier !")
   .wait(500)
   .then("Votre mission, si vous l'acceptez...")
   .then("Manger le plus de pommes possible !")
-  // .wait(1500)
-  // .then("");
+  .wait(500)
+  // .then(LienAccepter())
