@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.cdnfonts.com/css/cascadia-code" rel="stylesheet">
+  <link rel="stylesheet" href="styleTest.css">
+  <script src="snake2.js" defer></script>
+  <title>OUROBOROS</title>
+</head>
+
+<body>
+  <div class="container noselect full-page-div">
+    <div class="wrapper">
+      <input type="text" name="nomJoueur" id="zoneNom" placeholder="NAME HERE">
+      <button onclick="Launch()">
+          START PLAYING
+      </button>
+      <button id="replay">
+        <i class="fas fa-play"></i>
+        RESTART
+      </button>
+      <div id="canvas">
+
+      </div>
+      <div>
+        <button type="button" class="collapsible">PARAMETERS</button>
+        <div class="content menuCouleur menu hide" id="menuCouleur" style="display: none;">
+        <button id="snakeBleu" onclick="choice(1)">BLUE</button>
+        <button id="snakeVert" onclick="choice()">GREEN</button>
+        <button id="snakeRouge" onclick="choice(2)">RED</button>
+        <button id="snakeOrange" onclick="choice(4)">ORANGE</button>
+        <button id="snakeJaune" onclick="choice(3)">YELLOW</button>
+        <button id="snakeBlanc" onclick="choice(5)">WHITE</button>
+      </div>
+      </div>
+      
+      <div class="stats">
+        <div id="ui">
+        <h2>> SCORE</h2>
+        <span id="score">00</span>
+      </div>
+      <div id="ui">
+        <h2>> TIME</h2>
+        <div id="stopwatch">00:00:00</div>
+      </div>
+      </div>
+      
+      <div>
+        <button type="button" class="collapsible">ACCESS LEADERBOARD</button>
+        <div class="content" style="display: none;">
+          <h2 class="title">LEADERBOARD</h2>
+        <table id="tableau">
+            <thead>
+                <tr>
+                    <th scope="col" class="column">NAME</th>
+                    <th scope="col" class="column">SCORE</th>
+                    <th scope="col" class="column">TIME</th>
+                </tr>
+            </thead>
+        </table>
+        </div>
+    </div>
+    </div>
+    <div id="author">
+      <h1>SNAKE by TKZT</h1>
+    </div>
+  </div>
+</body>
+
+</html>

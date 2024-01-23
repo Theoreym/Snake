@@ -16,22 +16,24 @@
         <i class="fas fa-play"></i>
         RESTART
       </button>
+      <input type="text" class="depart" id="zoneNom" placeholder="your name here">
+      <button type="button" class="depart" id="validNom" onclick="Lancement()">START</button>
       <div id="canvas">
 
       </div>
       <div>
-        <button type="button" class="collapsible">Paramètres</button>
+        <button type="button" class="collapsible">PARAMETERS</button>
         <div class="content menuCouleur menu hide" id="menuCouleur" style="display: none;">
-        <button id="snakeBleu" onclick="choice(1)">Bleu</button>
-        <button id="snakeVert" onclick="choice()">Vert</button>
-        <button id="snakeRouge" onclick="choice(2)">Rouge</button>
-        <button id="snakeOrange" onclick="choice(4)">Orange</button>
-        <button id="snakeJaune" onclick="choice(3)">Jaune</button>
-        <button id="snakeBlanc" onclick="choice(5)">Blanc</button>
-        <button id="retourMenuScore" onclick="retourMenuScore()"><i class="fa-solid fa-delete-left"></i></button>
+          <button id="snakeBleu" onclick="choice(1)">BLUE</button>
+          <button id="snakeVert" onclick="choice()">GREEN</button>
+          <button id="snakeRouge" onclick="choice(2)">RED</button>
+          <button id="snakeOrange" onclick="choice(4)">ORANGE</button>
+          <button id="snakeJaune" onclick="choice(3)">YELLOW</button>
+          <button id="snakeBlanc" onclick="choice(5)">WHITE</button>
+          <button id="retourMenuScore" onclick="retourMenuScore()"><i class="fa-solid fa-delete-left"></i></button>
+        </div>
       </div>
-      </div>
-      
+
       <div id="ui">
         <h2>SCORE
         </h2>
@@ -42,22 +44,23 @@
         <div id="stopwatch">00:00:00</div>
       </div>
       <div>
-        <button type="button" class="collapsible">Accéder aux scores</button>
+        <button type="button" class="collapsible">ACCESS SCORES</button>
         <div class="content" style="display: none;">
-          <h2>TABLEAU DES SCORES</h2>
-        <table id="tableau">
+          <h2>SCORES HISTORY</h2>
+          <table id="tableau">
             <thead>
-                <tr>
-                    <th scope="col" style="width: 150px;">Score</th>
-                    <th scope="col" style="width: 150px;">Temps</th>
-                </tr>
+              <tr>
+                <th scope="col" style="width: 150px;">NAME</th>
+                <th scope="col" style="width: 150px;">SCORE</th>
+                <th scope="col" style="width: 150px;">TIME</th>
+              </tr>
             </thead>
             <tbody id="Tab">
-                <!-- Les résultats valides seront ajoutés ici -->
+              <!-- Les résultats valides seront ajoutés ici -->
             </tbody>
-        </table>
+          </table>
         </div>
-    </div>
+      </div>
     </div>
     <div id="author">
       <h1>SNAKE</h1> <span>by TKZT</span>

@@ -404,13 +404,12 @@ class Food {
     CTX.globalCompositeOperation = "source-over";
     CTX.shadowBlur = 0;
 
-    CTX.fillStyle = "black";
+    CTX.fillStyle = "white";
     CTX.beginPath();
-    CTX.moveTo(x + this.size / 2, y - this.size / 4); // Top point
-    CTX.lineTo(x + this.size / 4, y);               // Bottom-left point
-    CTX.lineTo(x + (3 * this.size) / 4, y);         // Bottom-right point
+    CTX.moveTo(x + this.size / 8, y - this.size / 2); // Top point
+    CTX.lineTo(x + this.size / 8, y - this.size / 8);               // Bottom-left point
+    CTX.lineTo(x + this.size / 2, y);         // Bottom-right point
     CTX.fill();
-
   }
   spawn() {
     // Place la nourriture à une position aléatoire
@@ -501,7 +500,7 @@ function choice(couleur) {
       break;
     case 4:
       //orange
-      skin = "#ffd133";
+      skin = "Orange";
       break;
     case 5:
       //blanc
@@ -574,7 +573,7 @@ function gameOver() {
   // Affichage des informations de fin de jeu
   CTX.fillStyle = "#4cffd7";
   CTX.textAlign = "center";
-  CTX.font = "bold 30px Poppins, sans-serif";
+  CTX.font = "bold 30px 'Cascadia Code', sans-serif";
   CTX.fillText("GAME OVER", W / 2, H / 2);
   CTX.font = "15px Poppins, sans-serif";
   CTX.fillText(`SCORE   ${score}`, W / 2, H / 2 + 60);
@@ -589,8 +588,6 @@ function gameOver() {
 
   //récupération du score final
   var finalScore = score;
-
-
   //ajout au tableau
   add(nom, finalScore, formattedFinalTime);
 
@@ -615,24 +612,10 @@ function reset() {
 }
 
 // Lancement du jeu lorsque le nom est rentré
-function Lancement() {
-
-  nom = document.querySelector("#zoneNom").value;
-
-  var depart = document.getElementsByClassName("depart");
-
-  for (i = 0; i < depart.length; i++) {
-    depart[i].addEventListener("click", function () {
-      this.classList.toggle("active");
-      var content = document.querySelector(".depart");
-      content.style.display = "none";
-    });
-  }
+function Launch() {  
+  nom = document.querySelector("#zoneNom").value;  
   initialize();
 }
-
-
-// initialize();
 
 // Gestion des mouvements de doigt sur mobile
 
@@ -697,7 +680,7 @@ var coll = document.getElementsByClassName("collapsible");
 var i;
 
 for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function () {
+  coll[i].addEventListener("click", function() {
     this.classList.toggle("active");
     var content = this.nextElementSibling;
     if (content.style.display === "block") {
@@ -707,3 +690,5 @@ for (i = 0; i < coll.length; i++) {
     }
   });
 } 
+
+
