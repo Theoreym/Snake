@@ -278,3 +278,57 @@ output q:last-child {
 		transform: translate(-22px, 5px) skew(21deg);
 	}
 }
+
+
+
+    /**ajustements version mobile */
+
+    @media screen and (min-width: 769px) and (max-width: 1500px){
+        #imgTitre img{
+            width: 100%;
+            padding-left: 2%;}
+        output {
+            height: 60vh;
+            padding: 0 5vh;
+            font-size: 3vw;
+            margin: 0 auto;
+        }
+        .block{
+            position: relative;
+            margin: 5% auto 0;
+            width: 80%;
+            height: 800px;
+        }
+
+        .boutonAccepter{
+            display: block;
+            top: 84%;
+            left: 40%;
+          }
+    }
+
+    @media screen and (max-width: 768px) {
+        #imgTitre img{
+            width: 100%;
+            padding-left: 2%;}
+        output {
+            height: 40vh;
+            padding: 0 5vh;
+            font-size: 5.6vw;
+            margin: 0 auto;
+        }
+        .block{
+            position: relative;
+            margin: 5% auto 0;
+            width: 80%;
+            height: 600px;
+        }
+
+        .boutonAccepter{
+            display: block;
+            top: 60%;
+            left: 19%;
+            font-size: 2em;
+          }
+
+    }
