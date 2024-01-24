@@ -55,5 +55,21 @@ type("Bienvenue aventurier !")
   .wait(500)
   .then("Votre mission, si vous l'acceptez...")
   .then("Manger le plus de pommes possible !")
-  // .wait(1500)
-  // .then("");
+  // .wait(500)
+  // .then("J'accepte la mission");
+
+//retardateur de la fonction
+  setTimeout(() => {
+    //fonction pour faire apparaître le bouton accepter après
+  function apparitionLien(){
+    const btnAccepter = document.createElement("a");
+    btnAccepter.classList.add("boutonAccepter", "glitch");
+    const contenuBtn = document.createTextNode("ACCEPTER LA MISSION");
+    btnAccepter.appendChild(contenuBtn);
+    document.body.appendChild(btnAccepter);
+    btnAccepter.href = "https://www.google.fr";
+  }
+
+  apparitionLien();
+
+  }, 8000);
