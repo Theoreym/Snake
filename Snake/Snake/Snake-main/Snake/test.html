@@ -13,7 +13,8 @@
 <body>
   <div class="container noselect full-page-div">
     <div class="wrapper">
-      <input type="text" name="nomJoueur" id="zoneNom" placeholder="NAME HERE">
+      <div id="log">
+        <input type="text" name="nomJoueur" id="zoneNom" placeholder="NAME HERE">
       <button onclick="Launch()">
           START PLAYING
       </button>
@@ -21,6 +22,9 @@
         <i class="fas fa-play"></i>
         RESTART
       </button>
+      </div>
+      
+      
       <div id="canvas">
 
       </div>
@@ -38,11 +42,11 @@
       
       <div class="stats">
         <div id="ui">
-        <h2>> SCORE</h2>
+        <h2 class="stat">> SCORE : </h2>
         <span id="score">00</span>
       </div>
-      <div id="ui">
-        <h2>> TIME</h2>
+      <div id="ui2">
+        <h2 class="stat">> TIME : </h2>
         <div id="stopwatch">00:00:00</div>
       </div>
       </div>

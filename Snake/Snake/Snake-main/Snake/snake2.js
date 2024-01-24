@@ -6,8 +6,8 @@ document.querySelector("#canvas").appendChild(dom_canvas);
 let CTX = dom_canvas.getContext("2d");
 
 // Constantes pour la taille du canvas
-const W = (dom_canvas.width = 400);
-const H = (dom_canvas.height = 400);
+const W = (dom_canvas.width = 500);
+const H = (dom_canvas.height = 500);
 
 //fonction temps
 

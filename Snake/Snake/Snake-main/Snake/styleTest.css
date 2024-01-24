@@ -198,7 +198,7 @@ h1 {
 	font-family: monospace;
 	color: rgba(128, 255, 128, 0.8);
 	text-shadow: 0 0 1ex #3f3, 0 0 2px rgba(255, 255, 255, 0.8);
-	font-size: 0.7em;
+	font-size: 0.45em;
 }
 
 canvas {
@@ -221,12 +221,19 @@ h2 {
 }
 
 #ui {
+	align-items: center;
 	line-height: 0.15em;
 	width: 300px;
 }
 
-.stats {
+#ui2 {
+	align-items: center;
+	line-height: 0.15em;
 	display: inline-flex;
+}
+
+.stats {
+	display: inline-block;
 }
 
 .column {
@@ -312,4 +319,21 @@ td{
       radial-gradient(ellipse 200% 20% at 50% 0%, rgba(0,0,0,1), transparent),
       linear-gradient(0deg, rgba(0,0,0,0.1) 50%, transparent 50%);
     background-size: 100%, 100%, 100%, 100%, 100%, 100% 0.25ch;
+}
+
+.stat{
+	display: inline-block;
+}
+
+#score{
+	font-size: 0.5em;
+	display: inline-flex;
+}
+
+#stopwatch{
+	font-size: 0.5em;
+}
+
+#log{
+	margin-bottom: 20px;
 }
