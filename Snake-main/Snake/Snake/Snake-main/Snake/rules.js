@@ -67,7 +67,7 @@ type("Bienvenue aventurier !")
     const contenuBtn = document.createTextNode("ACCEPTER LA MISSION");
     btnAccepter.appendChild(contenuBtn);
     document.body.appendChild(btnAccepter);
-    btnAccepter.href = "https://www.google.fr";
+    btnAccepter.href = "test.html";
   }
 
   apparitionLien();

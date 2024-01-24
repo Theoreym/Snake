@@ -6,8 +6,8 @@ document.querySelector("#canvas").appendChild(dom_canvas);
 let CTX = dom_canvas.getContext("2d");
 
 // Constantes pour la taille du canvas
-const W = (dom_canvas.width = 500);
-const H = (dom_canvas.height = 500);
+const W = (dom_canvas.width = 400);
+const H = (dom_canvas.height = 400);
 
 //fonction temps
 
@@ -252,26 +252,26 @@ class Snake {
     CTX.fillRect(x, y, this.size, this.size);
     CTX.shadowBlur = 0;
 
-    // Draw two black eyes on the snake's head
-    const eyeRadius = 3; // You can adjust the size of the eyes
+    // Dessine deux yeux
+    const eyeRadius = 3; // Taille des yeux
 
-    // Calculate eye positions relative to the snake's head
+    // Positionnement des yeux
     const leftEyeX = x + this.size * 0.25;
     const rightEyeX = x + this.size * 0.75;
     const eyeY = y + this.size * 0.25;
 
-    // Draw the left eye
+    // Oeil gauche
     CTX.fillStyle = "black";
     CTX.beginPath();
     CTX.arc(leftEyeX, eyeY, eyeRadius, 0, 2 * Math.PI);
     CTX.fill();
 
-    // Draw the right eye
+    // Oeil droite
     CTX.beginPath();
     CTX.arc(rightEyeX, eyeY, eyeRadius, 0, 2 * Math.PI);
     CTX.fill();
 
-    // Draw a smile below the eyes
+    // Sourire
     const smileRadius = this.size * 0.3; // You can adjust the size of the smile
     const smileCenterX = x + this.size * 0.5;
     const smileCenterY = y + this.size * 0.5;
@@ -286,7 +286,7 @@ class Snake {
       CTX.fillStyle = skin;
       CTX.fillRect(x, y, this.size, this.size);
 
-      CTX.strokeStyle = "#000000"; // Cross color (white in this case)
+      CTX.strokeStyle = "#000000"; // Couleur de la croix
       CTX.lineWidth = 2;
 
       CTX.beginPath();
