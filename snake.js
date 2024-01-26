@@ -327,10 +327,9 @@ class Snake {
   }
   controlls() {
     // Gère les contrôles du serpent
-    // Gère les contrôles du serpent
     let dir = this.size;
 
-    // Check the current direction of the snake
+    // Check la direction du snake
     const isMovingUp = this.dir.y < 0;
     const isMovingDown = this.dir.y > 0;
     const isMovingLeft = this.dir.x < 0;
